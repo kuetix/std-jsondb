@@ -1,0 +1,13 @@
+// Module name derived from filename: delete_index
+// Remove the index entries recorded for $args.id.
+
+import services/common
+
+def services/common/errors.OnAnyError(msg: "jsondb delete index failed", statusCode: 500) as errorHandler -> .
+
+jsondb/index.DeleteIndexes(
+    path: $args.path??"",
+    collection: $args.collection,
+    id: $args.id
+) as result <- errorHandler ->
+services/common/response.Response(value: $result, statusCode: 200) -> .

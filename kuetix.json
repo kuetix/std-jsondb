@@ -1,0 +1,27 @@
+{
+  "name": "kuetix/jsondb",
+  "type": "package",
+  "version": "0.1.0",
+  "description": "Kuetix engine package: small reusable transitions and workflows over the filejsondb file-based document store",
+  "author": "anar@kuetix.com",
+  "license": "MIT",
+  "workflows": [
+    "workflows/jsondb/ping.swsl",
+    "workflows/jsondb/set.swsl",
+    "workflows/jsondb/get.swsl",
+    "workflows/jsondb/update.swsl",
+    "workflows/jsondb/delete.swsl",
+    "workflows/jsondb/exists.swsl",
+    "workflows/jsondb/list.swsl",
+    "workflows/jsondb/count.swsl",
+    "workflows/jsondb/clear.swsl",
+    "workflows/jsondb/set_index.swsl",
+    "workflows/jsondb/get_indexes.swsl",
+    "workflows/jsondb/index_exists.swsl",
+    "workflows/jsondb/delete_index.swsl"
+  ],
+  "dependencies": {},
+  "engine": "v0.1.4",
+  "publisher": "",
+  "keywords": ["kuetix", "kuetix/jsondb", "jsondb", "filejsondb", "store", "package", "module"]
+}

@@ -1,0 +1,15 @@
+// Module name derived from filename: set_index
+// (Re)build the indexes for $args.id/$args.value across $args.fields.
+
+import services/common
+
+def services/common/errors.OnAnyError(msg: "jsondb set index failed", statusCode: 500) as errorHandler -> .
+
+jsondb/index.SetIndex(
+    path: $args.path??"",
+    collection: $args.collection,
+    id: $args.id,
+    value: $args.value,
+    fields: $args.fields??[]
+) as result <- errorHandler ->
+services/common/response.Response(value: $result, statusCode: 200) -> .

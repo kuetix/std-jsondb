@@ -1,0 +1,13 @@
+// Module name derived from filename: get_indexes
+// Return the index entries recorded for $args.id.
+
+import services/common
+
+def services/common/errors.OnAnyError(msg: "jsondb indexes not found", statusCode: 404) as errorHandler -> .
+
+jsondb/index.GetIndexes(
+    path: $args.path??"",
+    collection: $args.collection,
+    id: $args.id
+) as result <- errorHandler ->
+services/common/response.Response(value: $result, statusCode: 200) -> .

@@ -1,0 +1,15 @@
+// Module name derived from filename: set
+// Store a document under $args.id in $args.collection, indexing $args.indexes.
+
+import services/common
+
+def services/common/errors.OnAnyError(msg: "jsondb set failed", statusCode: 500) as errorHandler -> .
+
+jsondb/document.Set(
+    path: $args.path??"",
+    collection: $args.collection,
+    id: $args.id,
+    value: $args.value,
+    indexes: $args.indexes??[]
+) as result <- errorHandler ->
+services/common/response.Response(value: $result, statusCode: 200) -> .

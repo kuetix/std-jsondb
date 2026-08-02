@@ -1,0 +1,12 @@
+// Module name derived from filename: list
+// Return every document stored in $args.collection, keyed by id.
+
+import services/common
+
+def services/common/errors.OnAnyError(msg: "jsondb list failed", statusCode: 500) as errorHandler -> .
+
+jsondb/collection.GetAll(
+    path: $args.path??"",
+    collection: $args.collection
+) as result <- errorHandler ->
+services/common/response.Response(value: $result, statusCode: 200) -> .

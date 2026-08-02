@@ -1,0 +1,14 @@
+// Module name derived from filename: update
+// Overwrite the document stored under $args.id, keeping its indexes intact.
+
+import services/common
+
+def services/common/errors.OnAnyError(msg: "jsondb update failed", statusCode: 500) as errorHandler -> .
+
+jsondb/document.Update(
+    path: $args.path??"",
+    collection: $args.collection,
+    id: $args.id,
+    value: $args.value
+) as result <- errorHandler ->
+services/common/response.Response(value: $result, statusCode: 200) -> .

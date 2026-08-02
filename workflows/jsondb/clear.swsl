@@ -1,0 +1,12 @@
+// Module name derived from filename: clear
+// Purge the in-memory cache for $args.collection, forcing reads from disk.
+
+import services/common
+
+def services/common/errors.OnAnyError(msg: "jsondb clear failed", statusCode: 500) as errorHandler -> .
+
+jsondb/collection.Clear(
+    path: $args.path??"",
+    collection: $args.collection
+) as result <- errorHandler ->
+services/common/response.Response(value: $result, statusCode: 200) -> .

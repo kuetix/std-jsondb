@@ -1,0 +1,13 @@
+// Module name derived from filename: get
+// Read the document stored under $args.id in $args.collection.
+
+import services/common
+
+def services/common/errors.OnAnyError(msg: "jsondb document not found", statusCode: 404) as errorHandler -> .
+
+jsondb/document.Get(
+    path: $args.path??"",
+    collection: $args.collection,
+    id: $args.id
+) as result <- errorHandler ->
+services/common/response.Response(value: $result, statusCode: 200) -> .

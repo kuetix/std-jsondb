@@ -1,0 +1,13 @@
+// Module name derived from filename: index_exists
+// Report whether index entries exist for $args.id.
+
+import services/common
+
+def services/common/errors.OnAnyError(msg: "jsondb index exists check failed", statusCode: 500) as errorHandler -> .
+
+jsondb/index.IsExistsIndexes(
+    path: $args.path??"",
+    collection: $args.collection,
+    id: $args.id
+) as result <- errorHandler ->
+services/common/response.Response(value: $result, statusCode: 200) -> .

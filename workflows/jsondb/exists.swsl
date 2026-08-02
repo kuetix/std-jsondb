@@ -1,0 +1,13 @@
+// Module name derived from filename: exists
+// Report whether $args.id is present in $args.collection.
+
+import services/common
+
+def services/common/errors.OnAnyError(msg: "jsondb exists check failed", statusCode: 500) as errorHandler -> .
+
+jsondb/document.Exists(
+    path: $args.path??"",
+    collection: $args.collection,
+    id: $args.id
+) as result <- errorHandler ->
+services/common/response.Response(value: $result, statusCode: 200) -> .

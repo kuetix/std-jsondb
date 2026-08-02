@@ -1,0 +1,12 @@
+// Module name derived from filename: count
+// Return the number of documents stored in $args.collection.
+
+import services/common
+
+def services/common/errors.OnAnyError(msg: "jsondb count failed", statusCode: 500) as errorHandler -> .
+
+jsondb/collection.Len(
+    path: $args.path??"",
+    collection: $args.collection
+) as result <- errorHandler ->
+services/common/response.Response(value: $result, statusCode: 200) -> .

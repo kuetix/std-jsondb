@@ -1,0 +1,11 @@
+// Module name derived from filename: ping
+// Open (or reuse) the store at $args.path and report whether it is reachable.
+
+import services/common
+
+def services/common/errors.OnAnyError(msg: "jsondb ping failed", statusCode: 503) as errorHandler -> .
+
+jsondb/database.Ping(
+    path: $args.path??""
+) as result <- errorHandler ->
+services/common/response.Response(value: $result, statusCode: 200) -> .
